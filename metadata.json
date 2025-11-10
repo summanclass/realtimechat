@@ -1,0 +1,5 @@
+{
+  "name": "Real-time Web Chat",
+  "description": "An ultra-lightweight real-time web chat application built with React (Frontend) and Node.js (Backend). It features a simple, clean interface for entering a nickname and engaging in live conversations.",
+  "requestFramePermissions": []
+}
