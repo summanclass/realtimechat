@@ -1,17 +1,15 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import type { Socket } from 'socket.io-client';
 import { ChatMessage, MessageType, ActivityLog } from '../types';
 import LogViewerModal from './LogViewerModal';
-
-// This is a placeholder. Replace it with your actual backend server URL.
-const SERVER_URL = "https://my-chat-server-123.onrender.com"; 
 
 interface ChatRoomProps {
   nickname: string;
 }
 
 // Ensure the global 'io' object from the script tag is available
-declare const io: (url: string, options?: any) => Socket;
+declare const io: (options?: any) => Socket;
 
 const ChatRoom: React.FC<ChatRoomProps> = ({ nickname }) => {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -22,8 +20,9 @@ const ChatRoom: React.FC<ChatRoomProps> = ({ nickname }) => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Connect to the socket server
-    socketRef.current = io(SERVER_URL, {
+    // Connect to the socket server.
+    // By not providing a URL, Socket.IO automatically connects to the server that served the page.
+    socketRef.current = io({
       query: { nickname },
     });
 
